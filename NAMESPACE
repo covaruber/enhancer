@@ -9,7 +9,7 @@ importFrom("stats", "as.formula", "cov", "vcov", "terms", "model.matrix", "na.om
            "na.pass", "median", "reshape","var","aggregate", "sigma")
 
 export( "rrm","redmm","overlay","leg", "add.diallel.vars","simGECorMat",
-        "build.HMM","atcg1234", "atcg1234BackTransform", "A.matr", "I.matr" "neMarker","LD.decay",
+        "build.HMM","atcg1234", "atcg1234BackTransform", "A.matr", "I.matr" ,"neMarker","LD.decay",
         "bbasis", "tps", "wald.test",
         "adiag1","imputev","stan","logspace","replaceValues",
         "transp","jet.colors","bathy.colors", "manhattan", "map.plot", "simage", "simage2"
