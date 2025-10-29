@@ -1,0 +1,23 @@
+Package: enhancer
+Version: 1.1.0
+Date: 2025-10-21
+Title: Mixed-Effects Models Enhancer Functions
+Authors@R: c(
+    person("Giovanny","Covarrubias-Pazaran", email="cova_ruber@live.com.mx", role=c("aut","cre"),
+	comment=c(ORCID="0000-0002-7194-3837"))
+	)
+Maintainer: Giovanny Covarrubias-Pazaran <cova_ruber@live.com.mx>
+Description: Special functions that enhance other mixed effect model packages but also interesting functions by themselves for plots and others.
+Depends: R(>= 3.5.0), Matrix (>= 1.0), methods, crayon
+LazyLoad: yes
+LazyData: yes
+License: GPL (>= 2)
+Author: Giovanny Covarrubias-Pazaran [aut, cre] (<https://orcid.org/0000-0002-7194-3837>)
+Repository: CRAN
+Suggests: 
+    rmarkdown,
+    knitr,
+    orthopolynom, 
+    RSpectra
+VignetteBuilder: knitr
+Config/testthat/edition: 3
