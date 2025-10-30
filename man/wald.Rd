@@ -91,9 +91,10 @@ LL
 wald.test(b = m3$coefficients, Sigma = vcov(m3), L=LL)
 
 # sommer has 'Ci' slot for Sigma and 'bu' for coefficients
-# lme4breeding has condVar() function to extract Sigma for random effects and vcov() for fixed effect
-#              and has fixef() and ranef() to extract fixed and random coefficients.
+# lme4breeding has condVar() function to extract Sigma for random effects and 
+#  vcov() for fixed effect and has fixef() and ranef() to extract fixed and 
+#   random coefficients.
 
 
-  }
+}
 

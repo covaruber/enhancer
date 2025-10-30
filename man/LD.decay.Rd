@@ -63,13 +63,13 @@ axis(2,at=seq(0,1,.1), labels=seq(0,1,.1), las=1)
 
 #### if you want to add the loess regression lines
 #### this could take a long time!!!
-mod <- loess(r2 ~ d, data=res$all.LG)
-par(new=T)
-lilo <- predict(mod,data.frame(d=1:55))
-plot(lilo, bty="n", xaxt="n", yaxt="n", col="green",
-     type="l", ylim=c(0,1),ylab="",xlab="",lwd=2)
-res3 <- LD.decay(markers=CPgeno, map=mapCP,
-                unlinked = TRUE,gamma = .95)
-abline(h=res3$all.LG, col="red")
+# mod <- loess(r2 ~ d, data=res$all.LG)
+# par(new=TRUE)
+# lilo <- predict(mod,data.frame(d=1:55))
+# plot(lilo, bty="n", xaxt="n", yaxt="n", col="green",
+#     type="l", ylim=c(0,1),ylab="",xlab="",lwd=2)
+# res3 <- LD.decay(markers=CPgeno, map=mapCP,
+#                unlinked = TRUE,gamma = .95)
+# abline(h=res3$all.LG, col="red")
  }
 }

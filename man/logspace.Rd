@@ -5,7 +5,7 @@
   logspace creates a vector with decreasing logaritmic trend.
 }
 \usage{
-  logspace(x, p=1)
+  logspace(x, p=2)
 }
 
 \arguments{

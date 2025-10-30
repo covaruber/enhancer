@@ -8,7 +8,7 @@ Authors@R: c(
 	)
 Maintainer: Giovanny Covarrubias-Pazaran <cova_ruber@live.com.mx>
 Description: Special functions that enhance other mixed effect model packages but also interesting functions by themselves for plots and others.
-Depends: R(>= 3.5.0), Matrix (>= 1.0), methods, crayon
+Depends: R(>= 3.5.0), Matrix (>= 1.0), MASS, methods, crayon
 LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
@@ -19,5 +19,4 @@ Suggests:
     knitr,
     orthopolynom, 
     RSpectra
-VignetteBuilder: knitr
 Config/testthat/edition: 3

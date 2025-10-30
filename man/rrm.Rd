@@ -2,7 +2,7 @@
 \alias{rrm}
 \title{reduced rank matrix}
 \description{
-  \code{rrm} creates a reduced rank factor analytic matrix by selecting the n vectors of the L matrix of the Cholesky decomposition or the U vectors of the SVD decomposition (loadings or latent covariates) to create a new incidence matrix of latent covariates that can be used with the \code{\link{lmeb}} solver to fit random regressions on the latent covariates.
+  \code{rrm} creates a reduced rank factor analytic matrix by selecting the n vectors of the L matrix of the Cholesky decomposition or the U vectors of the SVD decomposition (loadings or latent covariates) to create a new incidence matrix of latent covariates that can be used with the \code{lmeb} solver to fit random regressions on the latent covariates.
 }
 \usage{
   rrm(x=NULL, H=NULL, nPC=2, returnGamma=FALSE, cholD=TRUE)
