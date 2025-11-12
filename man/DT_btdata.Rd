@@ -34,7 +34,7 @@ head(DT)
 ############# sommer ################
 
 if(requireNamespace("sommer")){
-
+library(sommer)
 mix4 <- mmes(tarsus ~ sex,
              random = ~ dam + fosternest,
              rcov=~units,
@@ -70,7 +70,7 @@ cov2cor(mix3$theta[[2]])
 ############# lme4breeding ################
 
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 mix4 <- lmeb(tarsus ~ sex + (1|dam) + (1|fosternest),
              data = DT)
 vc <- VarCorr(mix4); print(vc,comp=c("Variance"))

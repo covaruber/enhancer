@@ -35,7 +35,7 @@ DT <- DT_ige
 ############### sommer #################
 ########################################
 if(requireNamespace("sommer")){
-
+library(sommer)
 # Indirect genetic effects model without covariance between DGE and IGE
 modIGE <- mmes(trait ~ block, dateWarning = FALSE,
                random = ~ focal + neighbour,
@@ -69,7 +69,7 @@ pmonitor(modIGE)
 ############### lme4breeding #################
 ##############################################
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 # Indirect genetic effects model without covariance between DGE and IGE
 modIGE <- lmeb(trait ~ block + (1|focal) + (1|neighbour),
               data = DT)

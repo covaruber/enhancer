@@ -36,7 +36,7 @@ head(DT)
 ############## sommer ################
 
 if(requireNamespace("sommer")){
-
+library(sommer)
 mix <- mmes(stems~1, random=~female+male, data=DT)
 summary(mix)
 
@@ -45,7 +45,7 @@ summary(mix)
 ############## lme4breeding ################
 
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 mix <- lmeb(stems~1 + (1|female)+(1|male),
                 data=DT)
 vc <- VarCorr(mix); print(vc,comp=c("Variance"))

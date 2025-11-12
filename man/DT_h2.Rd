@@ -35,7 +35,7 @@ head(DT)
 
 ############### sommer ################
 if(requireNamespace("sommer")){
-
+library(sommer)
 DT=DT[with(DT, order(Env)), ]
 ans1 <- mmes(y~Env, henderson=TRUE,
               random=~vsm(dsm(Env),ism(Name)) + vsm(dsm(Env),ism(Block)),
@@ -47,7 +47,7 @@ summary(ans1)$varcomp
 
 ############### lme4breeding ################
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 # model with:
 # Main+Diagonal for Name
 # Diagonal for Block

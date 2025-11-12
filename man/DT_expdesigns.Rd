@@ -55,7 +55,7 @@ head(data1)
 
 ############ sommer ##############
 if(requireNamespace("sommer")){
-
+library(sommer)
 mix1 <- mmes(yield~entryc,
              random=~block+trt,
              rcov=~units,
@@ -66,7 +66,7 @@ summary(mix1)$varcomp
 
 ############ lme4breeding ##############
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 mix1 <- lmeb(yield~entryc + (1|block)+(1|trt),
              data=data1)
 vc <- VarCorr(mix1); print(vc,comp=c("Variance"))

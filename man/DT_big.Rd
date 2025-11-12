@@ -48,6 +48,7 @@ DT=DT[with(DT, order(envf_repf)), ]
 \donttest{
 
 if(requireNamespace("lme4breeding")){
+library(lme4breeding)
 # fit the models
 mixm2 <- lmeb(value ~ (1|envf_repf) + (0+envf_repf||id), 
                   data = DT, 

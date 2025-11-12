@@ -55,10 +55,11 @@ rownames(S) <- colnames(S) <- levels(DT$SCA)
 
 if(requireNamespace("sommer")){
 
+library(sommer)
 ans <- mmes(Yield ~ Location,
              random = ~ vsm(ism(GCA1),Gu=K1) + vsm(ism(GCA2),Gu=K2), # + vsm(ism(SCA),Gu=S),
              rcov=~units,
-             data=hybrid2)
+             data=DT)
 summary(ans)$varcomp
 
 ## mmec uses the inverse of the relationship matrix
@@ -75,7 +76,7 @@ ans2 <- mmes(Yield ~ Location,
              random = ~ vsm(ism(GCA1),Gu=K1i) + vsm(ism(GCA2),Gu=K2i), # + vsm(ism(SCA),Gu=Si),
              henderson=TRUE,
              rcov=~units,
-             data=hybrid2)
+             data=DT)
 summary(ans2)$varcomp
 
 }
@@ -83,6 +84,7 @@ summary(ans2)$varcomp
 ################ lme4breeding ###################
 
 if(requireNamespace("lme4breeding")){
+library(lme4breeding)
 
 ans <- lmeb(Yield ~ Location + (1| GCA1) + (1|GCA2),
                 relmat = list(GCA1=K1,

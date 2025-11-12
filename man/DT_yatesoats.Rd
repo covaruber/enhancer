@@ -45,7 +45,7 @@ head(DT)
 ############### sommer.      #################
 ##############################################
 if(requireNamespace("sommer")){
-
+library(sommer)
 m3 <- mmes(fixed=Y ~ V + N + V:N,
            random = ~ B + B:MP,
            rcov=~units,
@@ -58,7 +58,7 @@ summary(m3)$varcomp
 ############### lme4breeding #################
 ##############################################
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 mix <- lmeb(Y ~ V + N + V:N +
              (1|B) + (1|B:MP),
            data = DT)

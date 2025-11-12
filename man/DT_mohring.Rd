@@ -45,7 +45,7 @@ head(DT2)
 ##############################################
 
 if(requireNamespace("sommer")){
-
+library(sommer)
 # GRIFFING MODEL 2 with reciprocal effects ###########################
 
 mod1hb <- mmes(Ftime ~ 1, data=DT2,
@@ -159,7 +159,7 @@ summary(mod1h)$varcomp
 ##############################################
 
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 ## GRIFFING MODEL 2 with reciprocal effects ###########################
 ## overlay matrix to be added to the addmat argument
 Z <- with(DT, overlay(Par1, Par2) )

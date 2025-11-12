@@ -49,7 +49,7 @@ head(DT)
 ############## sommer #################
 
 if(requireNamespace("sommer")){
-
+library(sommer)
 mix1 <- mmes(BWT~1,
              random=~vsm(ism(ANIMAL),Gu=A),
              rcov=~units,
@@ -89,7 +89,7 @@ cov2cor(mix2$theta[[1]])
 
 ############## lme4breeding #################
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 ## fit the model with no fixed effects (intercept only)
 mix1 <- lmeb(BWT~ (1|ANIMAL),
                  relmat = list(ANIMAL=A),

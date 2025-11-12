@@ -69,7 +69,10 @@ DT <- data.frame(pheno=as.vector(DT),
                  env=as.factor(paste0("e", sort(rep(1:4,nrow(DT))))),
                  id=rep(rownames(DT),4))
 
-K <- A.matr(GT) # additive relationship matrix
+K <- tcrossprod(GT-1)
+m <- sum(diag(K))/nrow(K)
+K <- K/m
+K <- K + diag(1e-05, ncol(K), ncol(K))
 K[1:4,1:4]
 ##
 head(DT)
@@ -78,11 +81,11 @@ head(DT)
 
 ############## sommer ###############
 if(requireNamespace("sommer")){
-
-mix0 <- mmes(x1~1,
-             random = ~vsm(ism(line),Gu=K),
+library(sommer)
+mix0 <- mmes(pheno~1,
+             random = ~vsm(ism(id),Gu=K),
              rcov=~units,
-             data=DT)
+             data=DT[which(DT$env == "e1"),])
 summary(mix0)$varcomp
 # if using mmes=TRUE provide Gu as inverse
 Ki <- solve(K + diag(1e-4,ncol(K),ncol(K)))
@@ -94,7 +97,7 @@ attr(Ki, 'inverse')=TRUE
 ############## lme4breeding ###############
 
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 #### main effect model
 system.time(
 mix0 <- lmeb(pheno ~ (1|id),
@@ -122,16 +125,14 @@ sigma(mix1)^2 # error variance
 ############## evola ###############
 
 if(requireNamespace("evola")){
-
+library(evola)
 DT <- as.data.frame(DT_wheat)
 DT$id <- rownames(DT) # IDs
 DT$occ <- 1; DT$occ[1]=0 # to track occurrences
 DT$dummy <- 1; DT$dummy[1]=0 # dummy trait
 
 # if genomic
-GT <- GT_wheat + 1; rownames(GT) <- rownames(DT)
-G <-  GT\%*\%t(GT)
-G <- G/mean(diag(G))
+G <- K
 # if pedigree
 A <- A_wheat
 A[1:4,1:4]

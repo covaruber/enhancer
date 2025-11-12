@@ -51,7 +51,7 @@ M <- atcg1234(GT)
 ############### sommer.      #################
 ##############################################
 if(requireNamespace("sommer")){
-
+library(sommer)
 A <- A.mat(M$M)
 mix <- mmes(Protein.content~1,
             random = ~vsm(ism(geno), Gu=A) + geno,
@@ -89,7 +89,7 @@ cov2cor(mix$theta$`vsm(usm(trait), ism(geno), Gu = A`)
 ############### lme4breeding #################
 ##############################################
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 ### univariate model
 A <- A.matr(M$M)
 A <- A + diag(1e-4, ncol(A), ncol(A))

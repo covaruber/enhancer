@@ -61,7 +61,7 @@ A <- A.matr(marks)
 ###############  sommer.     #################
 ##############################################
 if(requireNamespace("sommer")){
-
+library(sommer)
 A <- A.mat(marks)
 D <- D.mat(marks)
 ###=========================================####
@@ -82,7 +82,7 @@ attr(Ai, 'inverse')=TRUE
 ############### lme4breeding #################
 ##############################################
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 ## run as mixed model
 A <- A + diag(1e-4,ncol(A),ncol(A))
 ans <- lmeb(tuber_shape~ (1|Name),

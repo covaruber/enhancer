@@ -35,6 +35,7 @@ head(DT)
 ############### sommer #################
 ########################################
 if(requireNamespace("sommer")){
+library(sommer)
 library(orthopolynom)
 mRR2<-mmes(Y~ 1 + Xf
            , random=~ vsm(usm(leg(X,1)),ism(SUBJECT))
@@ -48,7 +49,7 @@ summary(mRR2)$varcomp
 ############### lme4breeding #################
 ##############################################
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 library(orthopolynom)
 Z <- with(DT, smm(leg(X,1)) )
 for(i in 1:ncol(Z)){DT[,colnames(Z)[i]] <- Z[,i]}

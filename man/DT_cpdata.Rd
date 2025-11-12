@@ -53,7 +53,7 @@ head(DT)
 ######## sommer #########
 
 if(requireNamespace("sommer")){
-
+library(sommer)
 mix1 <- mmes(Yield~1, henderson=FALSE,
               random=~vsm(ism(id),Gu=A)
                       + Rowf + Colf,
@@ -94,7 +94,6 @@ DTL <- reshape(DT[,c("id", traits)],
 DTL <- DTL[with(DTL, order(trait)), ]
 head(DTL)
 
-A <- A.mat(GT) # additive relationship matrix
 # if using mmes=TRUE you need to provide the inverse
 Ai <- solve(A + diag(1e-4,ncol(A),ncol(A)))
 Ai <- as(as(as( Ai,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
@@ -111,7 +110,7 @@ cov2cor(ansm$theta[[1]])
 ######## lme4breeding #########
 
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 mix1 <- lmeb(Yield~ (1|id) + (1|Rowf) + (1|Colf),
                  relmat=list(id=A),
                  data=DT)
@@ -145,6 +144,7 @@ plot(preds$bu[2:364,], predsMix2$id[,1])
 ######## evola #########
 
 if(requireNamespace("evola")){
+library(evola)
 DT$occ <- 1
 DT$Yield <- imputev(DT$Yield)
 A <- A[DT$id,DT$id]

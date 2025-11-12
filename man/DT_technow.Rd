@@ -60,7 +60,7 @@ Af <- Af + diag(1e-4, ncol(Af), ncol(Af))
 
 ################# sommer ####################
 if(requireNamespace("sommer")){
-
+library(sommer)
 ans2 <- mmes(GY~1,
              random=~vsm(ism(dent),Gu=Ad) + vsm(ism(flint),Gu=Af),
              rcov=~units,
@@ -107,7 +107,7 @@ cov2cor(ans3$theta[[1]])
 ################# lme4breeding ####################
 
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 ## simple model
 ans2 <- lmeb(GY ~ (1|dent) + (1|flint),
                  data=DT)
@@ -154,11 +154,13 @@ condVAR <- lapply(BLUP, function(x){attr(x, which="postVar")}) # take sqrt() for
 ################# evola ####################
 
 if(requireNamespace("evola")){
-
+library(evola)
 DT <- DT_technow
   DT$occ <- 1; DT$occ[1]=0
-  M <- M_technow
-  A <- A.matr(M)
+  combos <- build.HMM(Md,Mf, return.combos.only = TRUE)
+  combos <- combos$data.used[which(combos$data.used$hybrid \%in\%DT$hy),]
+  M <- build.HMM(Md,Mf, custom.hyb = combos)
+  A <- A.matr(M$HMM.add)
   A <- A[DT$hy,DT$hy]
   # run the genetic algorithm
   # we assig a weight to x'Dx of (20*pi)/180=0.34

@@ -38,7 +38,7 @@ DT$genof <- as.factor(DT$geno)
 
 ############# sommer #############
 if(requireNamespace("sommer")){
-
+library(sommer)
 A <- diag(7); colnames(A) <- rownames(A) <- 1:7;A # if you want to provide a covariance matrix
 #### model using overlay
 modh <- mmes(sugar~1, 
@@ -56,7 +56,7 @@ summary(modh)$varcomp
 
 ############# lme4breeding #############
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 # overlay matrix to be added to the addmat argument
 Z <- with(DT, overlay(femalef,malef) )
 ## model using overlay without relationship matrix

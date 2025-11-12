@@ -36,6 +36,7 @@ head(DT)
 
 ############## sommer ##################
 if(requireNamespace("sommer")){
+library(sommer)
 mix1 <- mmes(TSW ~ Check.Gen,
              random = ~ Block + Genotype:Check,
              data=DT)
@@ -45,6 +46,7 @@ summary(mix1)$varcomp
 
 ############## lme4breeding ##################
 if(requireNamespace("lme4breeding")){
+library(lme4breeding)
 ## fit the mixed model and check summary
 mix <- lmeb(TSW ~ Check.Gen + (1|Block) + (1|Genotype:Check),
              data=DT)

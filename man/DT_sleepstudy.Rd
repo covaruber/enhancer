@@ -41,7 +41,7 @@ head(DT)
 ###############  sommer.     #################
 ##############################################
 if(requireNamespace("sommer")){
-
+library(sommer)
 ##################################
 fm2 <- mmes(Reaction ~ Days,
             random= ~ Subject, 
@@ -72,6 +72,7 @@ summary(fm2)$varcomp
 ############### lme4breeding #################
 ##############################################
 if(requireNamespace("lme4breeding")){
+library(lme4breeding)
 ##################################
 fm1 <- lmeb(Reaction ~ Days + (1 | Subject),
                 data=DT)

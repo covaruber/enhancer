@@ -44,7 +44,7 @@ nLocs=10 # desired number of representative locations
 \donttest{
 
 if(requireNamespace("evola")){
-
+library(evola)
 res<-evolafit(formula=cbind(cov, occ)~id, dt= DT, 
               # constraints: if sum is greater than this ignore 
               constraintsUB = c(Inf, Inf), 

@@ -38,7 +38,7 @@ head(DT)
 ################## sommer #####################
 
 if(requireNamespace("sommer")){
-
+library(sommer)
 ## Compound simmetry (CS) model
 ans1 <- mmes(Yield~Env,
              random= ~ Name + Env:Name,
@@ -86,7 +86,7 @@ cov2cor(ans1$theta$`vsm(usm(trait), ism(Name`)
 ################## lme4breeding #####################
 
 if(requireNamespace("lme4breeding")){
-
+library(lme4breeding)
 ## Compound simmetry (CS) model
 ans1 <- lmeb(Yield~Env + (1|Name) + (1|Env:Name),
              data=DT)
