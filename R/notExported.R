@@ -4,12 +4,11 @@ hits <- function(gwasm, nmar=10, threshold=1, pick=FALSE, method="cluster", only
     #####
     
     if(is.null(gwasm$W)){
-      #cat()
       stop("A GWAS model is needed to create the design matrix for bagging",call.=FALSE)
     }else{ ######## IF MODELS WAS A GWAS MODEL ###########
       
       if(pick){ ############# 'PICK=TRUE' ARGUMENT #################
-        cat("Please move the cursor to the GWAS plot, \nclick over the marker dots you want in the design matrix \nand press 'Esc' key when done")
+        message("Please move the cursor to the GWAS plot, \nclick over the marker dots you want in the design matrix \nand press 'Esc' key when done")
         plot(gwasm$W.scores$additive, col=transp("cadetblue"), pch=20)
         
         picked <- locator()$x
@@ -137,8 +136,8 @@ hits <- function(gwasm, nmar=10, threshold=1, pick=FALSE, method="cluster", only
           xvar <-(as.character(attr(summary(step)$terms, "variables")))[-c(1:2)]
           #head(X1)
           #xvar <- colnames(X1)
-          #cat(("Markers selected"))
-          #cat(paste(xvar))
+          #message(("Markers selected"))
+          #message(paste(xvar))
           X2 <- model.matrix(as.formula(paste("~ ", paste(c("1", xvar), collapse="+"))), data=X1)
           #X2 <- make.full(X2)
           #X2 <- as.data.frame(as.matrix(X2))
@@ -148,7 +147,7 @@ hits <- function(gwasm, nmar=10, threshold=1, pick=FALSE, method="cluster", only
           #step <- stepAIC(fit,direction="both",trace=FALSE)  #forward-backward stepwise regression
           
         }else{ # if not enough markers
-          #cat()
+          #message()
           stop("Not enough significant markers in your model to create a design matrix \nwith the number of markers specified by you. Please lower the 'threshold' \nargument or the number of markers in the 'nmar' argument",call. = FALSE)
         } #### end of if enough markers
         
@@ -251,14 +250,12 @@ maxi.qtl <- function(sma, distan=10, no.qtl=5, q95=2.5, LOD.int=FALSE, LODdrop=2
   res3 <- res2
   if(LOD.int){
     
-    #print(res3)
     
     lod2 <-list() 
     for(i in 1:dim(res3)[1]){
       #apply(res3,1,function(x,sma){
       
       x <- res3[i,]
-      #print(x)
       mpp <- sma[which(sma$chr == as.numeric(x[1])),]
       
       babo <- which(rownames(mpp) == rownames(x))#which(mpp$chr == as.numeric(x[1]) & mpp$pos == as.numeric(x[2]))
@@ -266,7 +263,6 @@ maxi.qtl <- function(sma, distan=10, no.qtl=5, q95=2.5, LOD.int=FALSE, LODdrop=2
       baba <- babo-1
       babu <- babo+1
       rt=0
-      #print(toch)
       while((rt < LODdrop) & (baba > 1)){ # 2-lod interval
         rt <- abs(as.numeric(mpp[baba,] - toch)[3])
         baba <- baba - 1
@@ -385,7 +381,7 @@ fdr2 <- function(p, fdr.level=0.05){
       qvalue <- function(p) {
         smooth.df = 3
         if (min(p) < 0 || max(p) > 1) {
-          print("ERROR: p-values not in valid range.")
+          message("ERROR: p-values not in valid range.")
           return(0)
         }
         lambda = seq(0, 0.9, 0.05)
@@ -397,10 +393,10 @@ fdr2 <- function(p, fdr.level=0.05){
         spi0 <- smooth.spline(lambda, pi0, df = smooth.df)
         pi0 <- predict(spi0, x = max(lambda))$y
         pi0 <- min(pi0, 1)
-        #print(pi0)
+        #message(pi0)
         if (pi0 <= 0) {
           #pi0 <- abs(pi0)
-          print("ERROR: The estimated pi0 <= 0. Check that you have valid p-values.")
+          message("ERROR: The estimated pi0 <= 0. Check that you have valid p-values.")
           return(0)
         }
         u <- order(p)
@@ -437,8 +433,8 @@ fdr2 <- function(p, fdr.level=0.05){
       if ((last - first) < 4) {
         last <- first + 3
       }
-      #print(qvals[first:last])
-      #print(temp2[first:last])
+      #message(qvals[first:last])
+      #message(temp2[first:last])
       splin <- smooth.spline(x = qvals[first:last], y = temp2[first:last],
                              df = 3)
       popo <- predict(splin, x = fdr.level)$y
