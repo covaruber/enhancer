@@ -1,13 +1,13 @@
 Package: enhancer
 Version: 1.1.0
 Date: 2025-10-21
-Title: Mixed-Effects Models Enhancer Functions
+Title: Mixed-Effects Models Enhancing Functions
 Authors@R: c(
     person("Giovanny","Covarrubias-Pazaran", email="cova_ruber@live.com.mx", role=c("aut","cre"),
 	comment=c(ORCID="0000-0002-7194-3837"))
 	)
 Maintainer: Giovanny Covarrubias-Pazaran <cova_ruber@live.com.mx>
-Description: Special functions that enhance other mixed effect model packages but also interesting functions by themselves for plots and others.
+Description: Special functions that enhance other mixed effect model packages by creating overlayed, reduced rank, and reduced model matrices together with multiple data sets to practice the use of these models. For more details see Covarrubias-Pazaran (2016) <doi:10.1371/journal.pone.0156744>.
 Depends: R(>= 3.5.0), Matrix (>= 1.0), MASS, methods, crayon
 LazyLoad: yes
 LazyData: yes
@@ -18,5 +18,8 @@ Suggests:
     rmarkdown,
     knitr,
     orthopolynom, 
-    RSpectra
+    RSpectra,
+    evola,
+    lme4breeding,
+    sommer
 Config/testthat/edition: 3

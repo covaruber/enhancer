@@ -41,7 +41,7 @@ for (i in 1:nInds) {
 }
 
 # run the function
-ne <- neMarker(M, neExplore = seq(2,300,50), nSamples = 10)
-plot(ne$Ne)
+ne <- neMarker(M, neExplore = seq(2,300,100), nSamples = 5)
+# plot(ne$Ne)
 
 }

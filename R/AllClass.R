@@ -560,7 +560,7 @@ build.HMM <- function(M1,M2, custom.hyb=NULL, return.combos.only=FALSE, separato
           Md <- Z1 %*% M1r - 1;  # Z.dent %*% M.dent - 1   # convert to -1,1
         }
         
-        if(verbose){cat("Extracting M2 contribution\n")}
+        if(verbose){message("Extracting M2 contribution\n")}
         if(all(checkM2 == c(1,1,0))){ # homo markers were coded correctly as -1,1
           Mf <- Z2 %*% M2r;  # was already converted to -1,1
         }else if(all(checkM2 == c(0,1,0)) | all(checkM2 == c(1,0,0))){ # homo markers were coded as 0 1
@@ -591,7 +591,7 @@ build.HMM <- function(M1,M2, custom.hyb=NULL, return.combos.only=FALSE, separato
     }
     
     #hist(Delta)
-    if(verbose){cat("Done!!\n")}
+    if(verbose){message("Done!!\n")}
     return(list(HMM.add=HMM.add, HMM.dom=HMM.dom, data.used=pheno))
     
   }else{
@@ -625,7 +625,7 @@ I.matr <- function(x){
 jet.colors <- function(n, alpha=1) {
   if(n > 0) {
     if(length(alpha) != 1 & length(alpha) != n) {
-      print('Warning: using only first alpha value')
+      message('Warning: using only first alpha value')
       alpha <- alpha[1]
     }
     if(length(alpha) == 1) {
@@ -1110,7 +1110,7 @@ neMarker <- function(M, neExplore=NULL, maxMarker=1000, nSamples=5){
   counter <- 1
   allelesCovered <- allelesCoveredSe <- vector(mode="numeric", length = length(neExplore) )
   for(i in neExplore){ # for a possible Ne
-    print(paste("Exploring allele coverage (%) at Ne:",i))
+    message(paste("Exploring allele coverage (%) at Ne:",i))
     allelesCoveredSample <- vector(mode="numeric", length = nSamples)
     # nSamples argument: take a couple of samples 
     for(j in 1:nSamples){
@@ -1912,29 +1912,29 @@ print.wald.test <- function(x, digits = 2, ...){
   Terms <- x[["Terms"]]; b <- x[["b"]]; H0 <- x[["H0"]]; v <- x[["result"]][["chi2"]]; df <- x[["df"]]
   verbose <- x[["verbose"]]
   namb <- names(b)[Terms]
-  cat("Wald test:\n", "----------\n", sep = "")
+  message(paste("Wald test:\n", "----------\n", sep = ""))
   if(verbose){
-    cat("\nCoefficients:\n")
-    print(format(b, digits = digits), quote = FALSE)
-    cat("\nVar-cov matrix of the coefficients:\n")
-    print(format(x[["Sigma"]], digits = digits), quote = FALSE)
-    cat("\nTest-design matrix:\n")
-    print(x[["L"]])
-    cat("\nPositions of tested coefficients in the vector of coefficients:", paste(Terms, collapse = ", "), "\n")
+    message("\nCoefficients:\n")
+    message(format(b, digits = digits), quote = FALSE)
+    message("\nVar-cov matrix of the coefficients:\n")
+    message(format(x[["Sigma"]], digits = digits), quote = FALSE)
+    message("\nTest-design matrix:\n")
+    message(x[["L"]])
+    message("\nPositions of tested coefficients in the vector of coefficients:", paste(Terms, collapse = ", "), "\n")
     if(is.null(namb))
-      cat("\nH0: ", paste(paste(format(b[Terms], digits), format(H0, digits = digits), sep = " = "), collapse = "; "), "\n")
+      message("\nH0: ", paste(paste(format(b[Terms], digits), format(H0, digits = digits), sep = " = "), collapse = "; "), "\n")
     else{
-      cat("\nH0: ", paste(paste(namb, format(H0, digits = digits), sep = " = "), collapse = "; "), "\n")
+      message("\nH0: ", paste(paste(namb, format(H0, digits = digits), sep = " = "), collapse = "; "), "\n")
     }
-    #    cat("\nTest results:\n")
+    
   }
-  cat("\nChi-squared test:\n")
-  cat("X2 = ", format(v["chi2"], digits = digits, nsmall = 1), ", df = ", v["df"],
+  message("\nChi-squared test:\n")
+  message("X2 = ", format(v["chi2"], digits = digits, nsmall = 1), ", df = ", v["df"],
       ", P(> X2) = ", format(v["P"], digits = digits, nsmall = 1), "\n", sep = "")
   if(!is.null(df)){
     v <- x[["result"]][["Ftest"]]
-    cat("\nF test:\n")
-    cat("W = ", format(v["Fstat"], digits = digits, nsmall = 1),
+    message("\nF test:\n")
+    message("W = ", format(v["Fstat"], digits = digits, nsmall = 1),
         ", df1 = ", v["df1"],
         ", df2 = ", v["df2"],
         ", P(> W) = ", format(v["P"], digits = digits), "\n", sep = "")
