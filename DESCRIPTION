@@ -1,6 +1,6 @@
 Package: enhancer
-Version: 1.1.0
-Date: 2025-10-21
+Version: 1.1.1
+Date: 2026-04-07
 Title: Mixed-Effects Models Enhancing Functions
 Authors@R: c(
     person("Giovanny","Covarrubias-Pazaran", email="cova_ruber@live.com.mx", role=c("aut","cre"),
@@ -14,7 +14,7 @@ LazyData: yes
 License: GPL (>= 2)
 Author: Giovanny Covarrubias-Pazaran [aut, cre] (<https://orcid.org/0000-0002-7194-3837>)
 Repository: CRAN
-Suggests: 
+Enhances: 
     rmarkdown,
     knitr,
     orthopolynom, 
