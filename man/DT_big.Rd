@@ -51,11 +51,12 @@ DT=DT[with(DT, order(envf_repf)), ]
 if(requireNamespace("sommer")){
   library(sommer)
   MMTi <- solve(MMT + diag(1e-4,ncol(MMT),ncol(MMT)))
+  MMTi[lower.tri(MMTi)] <- t(MMTi)[lower.tri(MMTi)] # fill the lower triangular
   MMTi <- as(as(as( MMTi,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
   attr(MMTi, 'inverse')=TRUE
   # fit the models
   mixm2 <- mmes(value ~ 1,
-                random=~vsm(ism(envf_repf)) + vsm(dsm(envf_repf), ism(id)),
+                random=~vsm(ism(envf_repf)) + vsm(dsm(envf_repf), ism(id), Gu=MMTi, rotation=TRUE),
                 data = DT
   )
   summary(mixm2)$varcomp
