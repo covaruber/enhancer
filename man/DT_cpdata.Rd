@@ -54,12 +54,6 @@ head(DT)
 
 if(requireNamespace("sommer")){
 library(sommer)
-mix1 <- mmes(Yield~1, henderson=FALSE,
-              random=~vsm(ism(id),Gu=A)
-                      + Rowf + Colf,
-              rcov=~units,
-              data=DT)
-summary(mix1)$varcomp
 
 ## mmec uses the inverse of the relationship matrix
 Ai <- solve(A + diag(1e-4,ncol(A),ncol(A)))
@@ -71,6 +65,12 @@ mix2 <- mmes(Yield~1, henderson=TRUE,
               rcov=~units,
               data=DT)
 summary(mix2)$varcomp
+
+#                VarComp VarCompSE    Zratio
+# id:Ai:sigma2  807.5697 223.99327  3.605330
+# Rowf:sigma2   848.7515 280.88548  3.021700
+# Colf:sigma2   198.7981  90.23763  2.203051
+# units:sigma2 2990.7911 189.57248 15.776505
 
 vg <- summary(mix2)$varcomp[1,1] # genetic variance
 G <- A*vg # genetic variance-covariance

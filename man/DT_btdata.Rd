@@ -41,6 +41,11 @@ mix4 <- mmes(tarsus ~ sex,
              data = DT)
 summary(mix4)$varcomp
 
+#                      VarComp  VarCompSE    Zratio
+# dam:sigma2        0.22021839 0.03228929  6.820168
+# fosternest:sigma2 0.06924283 0.01962657  3.528014
+# units:sigma2      0.56789911 0.02163284 26.251715
+
 # MULTI-TRAIT EXAMPLE
 
 traits <- c("tarsus","back","hatchdate")

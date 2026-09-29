@@ -40,17 +40,22 @@ DT$genof <- as.factor(DT$geno)
 if(requireNamespace("sommer")){
 library(sommer)
 A <- diag(7); colnames(A) <- rownames(A) <- 1:7;A # if you want to provide a covariance matrix
+# if ussing mmes=TRUE provide Gu with inverses and give more iterations
+Ai <- solve(A + diag(1e-4,ncol(A),ncol(A)))
+Ai <- as(as(as( Ai,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
+attr(Ai, 'inverse')=TRUE 
+
 #### model using overlay
 modh <- mmes(sugar~1, 
-             random=~vsm(ism(overlay(femalef,malef, sparse = FALSE)), Gu=A) 
+             random=~vsm(ism(overlay(femalef,malef, sparse = FALSE)), Gu=Ai) 
              + genof,
              data=DT)
 summary(modh)$varcomp
+#                          VarComp VarCompSE   Zratio
+# femalef:malef:Ai:sigma2 5.509432 2.5259600 2.181124
+# genof:sigma2            1.814000 0.9089425 1.995726
+# units:sigma2            3.119583 0.6434801 4.847987
 
-# if ussing mmes=TRUE provide Gu with inverses and give more iterations
-# Ai <- solve(A + diag(1e-4,ncol(A),ncol(A)))
-# Ai <- as(as(as( Ai,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
-# attr(Ai, 'inverse')=TRUE 
 
 }
 
@@ -68,9 +73,10 @@ vc <- VarCorr(modh); print(vc,comp=c("Variance"))
 ## model using overlay with relationship matrix
 ## relationship matrix to be added to the relmat argument
 A <- diag(7); colnames(A) <- rownames(A) <- 1:7;A
+
 modh <- lmeb(sugar ~ (1|genof) + (1|fema),
                  addmat = list(fema=Z),
-                 relmat = list(fema=A),
+                 relmat = list(fema=Ai),
                  data=DT)
 vc <- VarCorr(modh); print(vc,comp=c("Variance"))
 sigma(modh)^2 # error variance

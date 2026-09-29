@@ -46,6 +46,11 @@ ans1 <- mmes(Yield~Env,
              data=DT)
 summary(ans1)$varcomp
 
+#                  VarComp VarCompSE   Zratio
+# Name:sigma2     3.683450 1.0934509 3.368647
+# Env:Name:sigma2 5.171498 0.9708739 5.326642
+# units:sigma2    4.366775 0.4477525 9.752655
+
 ####===========================================####
 #### Univariate heterogeneous variance models  ####
 ####===========================================####

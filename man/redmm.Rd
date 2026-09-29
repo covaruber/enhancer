@@ -52,8 +52,14 @@ rownames(H0) <- paste("e",1:5,sep="_")
 colnames(H0) <- paste("x",1:6,sep="_")
 H0
 # get compression
+
+if(requireNamespace("RSpectra")){
+
+library(RSpectra)
 Z <- with(DT,  redmm(Env, M = H0, nPC = 3))
 Z
+
+}
 
 
 }

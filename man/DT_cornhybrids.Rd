@@ -56,11 +56,6 @@ rownames(S) <- colnames(S) <- levels(DT$SCA)
 if(requireNamespace("sommer")){
 
 library(sommer)
-ans <- mmes(Yield ~ Location,
-             random = ~ vsm(ism(GCA1),Gu=K1) + vsm(ism(GCA2),Gu=K2), # + vsm(ism(SCA),Gu=S),
-             rcov=~units,
-             data=DT)
-summary(ans)$varcomp
 
 ## mmec uses the inverse of the relationship matrix
 K1i <- solve(K1 + diag(1e-4,ncol(K1),ncol(K1)))
@@ -78,6 +73,11 @@ ans2 <- mmes(Yield ~ Location,
              rcov=~units,
              data=DT)
 summary(ans2)$varcomp
+
+#                      VarComp    VarCompSE     Zratio
+# GCA1:K1i:sigma2 2.261793e-03  0.006034644  0.3748015
+# GCA2:K2i:sigma2 3.311384e+01 11.610697592  2.8520109
+# units:sigma2    3.730552e+02 19.281158401 19.3481730
 
 }
 

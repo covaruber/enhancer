@@ -50,17 +50,22 @@ head(DT)
 
 if(requireNamespace("sommer")){
 library(sommer)
-mix1 <- mmes(BWT~1,
-             random=~vsm(ism(ANIMAL),Gu=A),
-             rcov=~units,
-             data=DT)
-summary(mix1)$varcomp
 
 ## mmes algorithm uses the inverse of the relationship matrix
 ## if you select henderson=TRUE
 Ai <- solve(A + diag(1e-4,ncol(A),ncol(A)))
 Ai <- as(as(as( Ai,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
 attr(Ai, 'inverse')=TRUE
+
+mix1 <- mmes(BWT~1,
+             random=~vsm(ism(ANIMAL),Gu=Ai),
+             rcov=~units,
+             data=DT)
+summary(mix1)$varcomp
+#                   VarComp VarCompSE   Zratio
+# ANIMAL:Ai:sigma2 3.401020 0.3223866 10.54951
+# units:sigma2     3.823662 0.2631004 14.53309
+
 ####====================####
 #### multivariate model ####
 ####     2 traits       ####
@@ -79,7 +84,7 @@ head(DTL)
 
 # #### fit the multivariate model with no fixed effects (intercept only)
 mix2 <- mmes(value~trait, # henderson=TRUE,
-             random=~vsm(usm(trait),ism(ANIMAL),Gu=A),
+             random=~vsm(usm(trait),ism(ANIMAL),Gu=Ai),
              rcov=~vsm(dsm(trait),ism(units)),
              data=DTL)
 summary(mix2)$varcomp

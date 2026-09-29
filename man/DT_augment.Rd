@@ -42,6 +42,11 @@ mix1 <- mmes(TSW ~ Check.Gen,
              data=DT)
 summary(mix1)$varcomp
 
+#                          VarComp  VarCompSE    Zratio
+# Block:sigma2          0.01384922 0.02098746 0.6598806
+# Genotype:Check:sigma2 0.36447866 0.08905619 4.0926818
+# units:sigma2          0.17571300 0.04960383 3.5423271
+
 }
 
 ############## lme4breeding ##################

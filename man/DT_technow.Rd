@@ -61,11 +61,6 @@ Af <- Af + diag(1e-4, ncol(Af), ncol(Af))
 ################# sommer ####################
 if(requireNamespace("sommer")){
 library(sommer)
-ans2 <- mmes(GY~1,
-             random=~vsm(ism(dent),Gu=Ad) + vsm(ism(flint),Gu=Af),
-             rcov=~units,
-             data=DT)
-summary(ans2)$varcomp
 
 Adi <- solve(Ad + diag(1e-4,ncol(Ad),ncol(Ad)))
 Adi <- as(as(as( Adi,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
@@ -73,6 +68,17 @@ attr(Adi, 'inverse')=TRUE
 Afi <- solve(Af + diag(1e-4,ncol(Af),ncol(Af)))
 Afi <- as(as(as( Afi,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
 attr(Afi, 'inverse')=TRUE
+
+ans2 <- mmes(GY~1,
+             random=~vsm(ism(dent),Gu=Adi) + vsm(ism(flint),Gu=Afi),
+             rcov=~units,
+             data=DT)
+summary(ans2)$varcomp
+#                   VarComp VarCompSE    Zratio
+# dent:Adi:sigma2  16.75067 1.9163828  8.740772
+# flint:Afi:sigma2 10.86027 1.5040308  7.220775
+# units:sigma2     17.78028 0.5479661 32.447766
+
 ####====================####
 #### multivariate model ####
 ####     2 traits       ####

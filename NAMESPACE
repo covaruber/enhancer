@@ -18,7 +18,7 @@ importFrom("grDevices", "col2rgb", "colorRampPalette", "dev.cur",
 importFrom("graphics", "abline", "axis", "legend", "lines", "locator",
              "par", "plot.new", "points", "polygon", "segments", "text")
 
-export( "rrm","redmm","overlay","leg", "add.diallel.vars","simGECorMat",
+export( "rrmat","redmm","overlay","leg", "add.diallel.vars","simGECorMat",
         "build.HMM","atcg1234", "atcg1234BackTransform", "A.matr", "I.matr" ,"neMarker","LD.decay",
         "bbasis", "tps", "wald.test",
         "adiag1","imputev","stan","logspace","replaceValues", "propMissing",

@@ -62,6 +62,11 @@ mix1 <- mmes(yield~entryc,
              data=data1)
 summary(mix1)$varcomp
 
+#               VarComp VarCompSE    Zratio
+# block:sigma2 17.79039 15.574069 1.1423083
+# trt:sigma2   10.35259 15.257396 0.6785295
+# units:sigma2 24.91456  8.020923 3.1061957
+
 }
 
 ############ lme4breeding ##############

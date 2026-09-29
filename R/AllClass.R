@@ -1305,7 +1305,7 @@ replaceValues <- function (Source, Search, Replace) {
   return(Changed)
 }
 
-rrm <- function(x=NULL, H=NULL, nPC=2, returnGamma=FALSE, cholD=TRUE){
+rrmat <- function(x=NULL, H=NULL, nPC=2, returnGamma=FALSE, cholD=TRUE){
   if(is.null(x) ){stop("Please provide the x argument.", call. = FALSE)}
   if(is.null(H) ){stop("Please provide the x argument.", call. = FALSE)}
   # these are called PC models by Meyer 2009, GSE. This is a reduced rank implementation

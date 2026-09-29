@@ -47,6 +47,20 @@ DT=DT[with(DT, order(envf_repf)), ]
 
 \donttest{
 
+
+if(requireNamespace("sommer")){
+  library(sommer)
+  MMTi <- solve(MMT + diag(1e-4,ncol(MMT),ncol(MMT)))
+  MMTi <- as(as(as( MMTi,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  attr(MMTi, 'inverse')=TRUE
+  # fit the models
+  mixm2 <- mmes(value ~ 1,
+                random=~vsm(ism(envf_repf)) + vsm(dsm(envf_repf), ism(id)),
+                data = DT
+  )
+  summary(mixm2)$varcomp
+}
+
 if(requireNamespace("lme4breeding")){
 library(lme4breeding)
 # fit the models

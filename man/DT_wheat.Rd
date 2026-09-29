@@ -82,15 +82,16 @@ head(DT)
 ############## sommer ###############
 if(requireNamespace("sommer")){
 library(sommer)
-mix0 <- mmes(pheno~1,
-             random = ~vsm(ism(id),Gu=K),
-             rcov=~units,
-             data=DT[which(DT$env == "e1"),])
-summary(mix0)$varcomp
 # if using mmes=TRUE provide Gu as inverse
 Ki <- solve(K + diag(1e-4,ncol(K),ncol(K)))
 Ki <- as(as(as( Ki,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
 attr(Ki, 'inverse')=TRUE
+mix0 <- mmes(pheno~1,
+             random = ~vsm(ism(id),Gu=Ki),
+             rcov=~units,
+             data=DT[which(DT$env == "e1"),])
+summary(mix0)$varcomp
+
 
 }
 

@@ -53,16 +53,16 @@ M <- atcg1234(GT)
 if(requireNamespace("sommer")){
 library(sommer)
 A <- A.mat(M$M)
-mix <- mmes(Protein.content~1,
-            random = ~vsm(ism(geno), Gu=A) + geno,
-            rcov=~units,
-            data=DT)
-summary(mix)$varcomp
 # if using henderson=TRUE provide Gu as inverse
 Ai <- solve(A + diag(1e-6,ncol(A),ncol(A)))
 Ai <- as(as(as( Ai,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
 attr(Ai, 'inverse')=TRUE
 
+mix <- mmes(Protein.content~1,
+            random = ~vsm(ism(geno), Gu=Ai) + geno,
+            rcov=~units,
+            data=DT)
+summary(mix)$varcomp
 
 
 ## MULTI-TRAIT MODEL
@@ -74,14 +74,12 @@ DTL <- reshape(DT[,c("geno", traits)], idvar = "geno", varying = traits,
 DTL <- DTL[with(DTL, order(trait)), ]
 head(DTL)
 
-M <- DTLM <- atcg1234(GT)
-A <- A.mat(M$M)
 mix <- mmes(value~trait,
-            random = ~vsm(usm(trait),ism(geno), Gu=A) ,
+            random = ~vsm(usm(trait),ism(geno), Gu=Ai) ,
             rcov=~vsm(dsm(trait), ism(units)),
             data=DTL)
 summary(mix)$varcomp
-cov2cor(mix$theta$`vsm(usm(trait), ism(geno), Gu = A`)
+cov2cor(mix$theta$`vsm(usm(trait), ism(geno), Gu = Ai`)
 
 }
 

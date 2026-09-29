@@ -38,8 +38,11 @@ head(DT)
 if(requireNamespace("sommer")){
 library(sommer)
 mix <- mmes(stems~1, random=~female+male, data=DT)
-summary(mix)
-
+summary(mix)$varcomp
+#                VarComp VarCompSE   Zratio
+# female:sigma2 1.985694  1.283948 1.546554
+# male:sigma2   1.777242  1.190828 1.492442
+# units:sigma2  5.289707  1.039108 5.090624
 }
 
 ############## lme4breeding ################

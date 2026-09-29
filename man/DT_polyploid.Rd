@@ -64,17 +64,20 @@ if(requireNamespace("sommer")){
 library(sommer)
 A <- A.mat(marks)
 D <- D.mat(marks)
-###=========================================####
-### run as mixed model
-###=========================================####
-ans <- mmes(tuber_shape~1,
-            random=~vsm(ism(Name), Gu=A),
-            data=DT2)
-summary(ans)$varcomp
 # if using mmes=TRUE provide Gu as inverse
 Ai <- solve(A + diag(1e-4,ncol(A),ncol(A)))
 Ai <- as(as(as( Ai,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
 attr(Ai, 'inverse')=TRUE
+###=========================================####
+### run as mixed model
+###=========================================####
+ans <- mmes(tuber_shape~1,
+            random=~vsm(ism(Name), Gu=Ai),
+            data=DT2)
+summary(ans)$varcomp
+#                  VarComp  VarCompSE    Zratio
+# Name:Ai:sigma2 0.1536639 0.06277530  2.447841
+# units:sigma2   0.9119941 0.06928765 13.162433
 
 }
 

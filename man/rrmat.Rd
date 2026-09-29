@@ -1,11 +1,11 @@
-\name{rrm}
-\alias{rrm}
+\name{rrmat}
+\alias{rrmat}
 \title{reduced rank matrix}
 \description{
-  \code{rrm} creates a reduced rank factor analytic matrix by selecting the n vectors of the L matrix of the Cholesky decomposition or the U vectors of the SVD decomposition (loadings or latent covariates) to create a new incidence matrix of latent covariates that can be used with the \code{lmeb} solver to fit random regressions on the latent covariates.
+  \code{rrmat} creates a reduced rank factor analytic matrix by selecting the n vectors of the L matrix of the Cholesky decomposition or the U vectors of the SVD decomposition (loadings or latent covariates) to create a new incidence matrix of latent covariates that can be used with the \code{lmeb} solver to fit random regressions on the latent covariates.
 }
 \usage{
-  rrm(x=NULL, H=NULL, nPC=2, returnGamma=FALSE, cholD=TRUE)
+  rrmat(x=NULL, H=NULL, nPC=2, returnGamma=FALSE, cholD=TRUE)
 }
 
 \arguments{
@@ -37,7 +37,7 @@ y = Xb + Z(I Gamma)c + e = Xb + Z*c + e
 
 which is equal to the one above but assumes specific effects = 0. 
 
-\strong{The algorithm in rrm is the following:}
+\strong{The algorithm in rrmat is the following:}
 
 1) uses a wide-format table of timevar (m columns) by idvar (q rows) named H to form the initial variance-covariance matrix (Sigma) which is calculated as Sigma = H'H of dimensions m x m (column dimensions, e.g., environments x environments). 
 
@@ -98,7 +98,7 @@ colnames(H0) <- paste("e",1:5,sep="_")
 rownames(H0) <- paste("x",1:6,sep="_")
 H0
 # get latent factors
-Z <- with(DT,  rrm(Env, H = H0, nPC = 3))
+Z <- with(DT,  rrmat(Env, H = H0, nPC = 3))
 Z
 
 
