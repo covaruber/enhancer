@@ -5,13 +5,13 @@ structures. It is a dependency for all these packages.
 
 ## Installation
 
-You can install the development version of `coolFuns` from GitHub:
+You can install the development version of `enhancer` from GitHub:
 
 ``` r
-devtools::install_github('covaruber/coolFuns')
+devtools::install_github('covaruber/enhancer')
 ```
 In addition, the package is also available on CRAN:
 
 ``` r
-install.packages("coolFuns")
+install.packages("enhancer")
 ```
