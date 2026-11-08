@@ -1,6 +1,6 @@
 Package: enhancer
 Version: 1.1.2
-Date: 2026-04-07
+Date: 2026-10-01
 Title: Mixed-Effects Models Enhancing Functions
 Authors@R: c(
     person("Giovanny","Covarrubias-Pazaran", email="cova_ruber@live.com.mx", role=c("aut","cre"),

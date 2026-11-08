@@ -72,6 +72,7 @@ attr(Afi, 'inverse')=TRUE
 ans2 <- mmes(GY~1,
              random=~vsm(ism(dent),Gu=Adi) + vsm(ism(flint),Gu=Afi),
              rcov=~units,
+             control = mmes_control(),
              data=DT)
 summary(ans2)$varcomp
 #                   VarComp VarCompSE    Zratio
@@ -101,7 +102,7 @@ Ai <- solve(A + diag(1e-4,ncol(A),ncol(A)))
 Ai <- as(as(as( Ai,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
 attr(Ai, 'inverse')=TRUE
 
-ans3 <- mmes(value~trait, henderson=TRUE,
+ans3 <- mmes(value~trait, control = mmes_control(formulation = "henderson"),
              random=~vsm(usm(trait),ism(overlay(dent,flint)),Gu=Ai),
              rcov=~ vsm(dsm(trait), ism(units)),
              data=DTL)

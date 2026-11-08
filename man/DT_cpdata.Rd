@@ -59,7 +59,7 @@ library(sommer)
 Ai <- solve(A + diag(1e-4,ncol(A),ncol(A)))
 Ai <- as(as(as( Ai,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
 attr(Ai, 'inverse')=TRUE
-mix2 <- mmes(Yield~1, henderson=TRUE,
+mix2 <- mmes(Yield~1, control = mmes_control(formulation = "henderson"),
               random=~vsm(ism(id),Gu=Ai)
                       + Rowf + Colf,
               rcov=~units,
@@ -72,8 +72,9 @@ summary(mix2)$varcomp
 # Colf:sigma2   198.7981  90.23763  2.203051
 # units:sigma2 2990.7911 189.57248 15.776505
 
-vg <- summary(mix2)$varcomp[1,1] # genetic variance
+vg <- summary(mix2)$varcomp[1,"estimate"] # genetic variance
 G <- A*vg # genetic variance-covariance
+ mix2 <- postPEV(mix2, mode=2L) # recover the Ci matrix
 Ci <- mix2$Ci # coefficient matrix
 ind <- as.vector(mix2$partitions$`vsm(ism(id), Gu = Ai)`)
 ind <- seq(ind[1],ind[2])
@@ -99,8 +100,8 @@ Ai <- solve(A + diag(1e-4,ncol(A),ncol(A)))
 Ai <- as(as(as( Ai,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
 attr(Ai, 'inverse')=TRUE
 #### be patient take some time
-ansm <- mmes( value ~ trait, # henderson=TRUE,
-               random=~ vsm(usm(trait), ism(id), Gu=A), # Ai if henderson
+ansm <- mmes( value ~ trait, control = mmes_control(formulation = "henderson"),
+               random=~ vsm(usm(trait), ism(id), Gu=Ai),
                rcov=~ vsm(dsm(trait), ism(units)),
                data=DTL)
 cov2cor(ansm$theta[[1]])
@@ -186,4 +187,3 @@ pareto(res)
 
 }
 \keyword{datasets}
-

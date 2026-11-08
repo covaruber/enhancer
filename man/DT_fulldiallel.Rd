@@ -37,7 +37,7 @@ head(DT)
 
 if(requireNamespace("sommer")){
 library(sommer)
-mix <- mmes(stems~1, random=~female+male, data=DT)
+mix <- mmes(stems~1, random=~female+male, control = mmes_control(), data=DT)
 summary(mix)$varcomp
 #                VarComp VarCompSE   Zratio
 # female:sigma2 1.985694  1.283948 1.546554

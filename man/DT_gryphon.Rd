@@ -53,13 +53,13 @@ library(sommer)
 
 ## mmes algorithm uses the inverse of the relationship matrix
 ## if you select henderson=TRUE
-Ai <- solve(A + diag(1e-4,ncol(A),ncol(A)))
-Ai <- as(as(as( Ai,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
+Ai <- as(solve(A), "CsparseMatrix")
 attr(Ai, 'inverse')=TRUE
 
 mix1 <- mmes(BWT~1,
              random=~vsm(ism(ANIMAL),Gu=Ai),
              rcov=~units,
+             control = mmes_control(),
              data=DT)
 summary(mix1)$varcomp
 #                   VarComp VarCompSE   Zratio
@@ -83,7 +83,7 @@ DTL <- DTL[with(DTL, order(trait,ANIMAL)), ]
 head(DTL)
 
 # #### fit the multivariate model with no fixed effects (intercept only)
-mix2 <- mmes(value~trait, # henderson=TRUE,
+mix2 <- mmes(value~trait, control = mmes_control(formulation = "henderson"),
              random=~vsm(usm(trait),ism(ANIMAL),Gu=Ai),
              rcov=~vsm(dsm(trait),ism(units)),
              data=DTL)
@@ -130,4 +130,3 @@ sigma(mix)^2 # error variance
 
 }
 \keyword{datasets}
-

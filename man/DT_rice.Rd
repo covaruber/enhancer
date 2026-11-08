@@ -61,6 +61,7 @@ attr(Ai, 'inverse')=TRUE
 mix <- mmes(Protein.content~1,
             random = ~vsm(ism(geno), Gu=Ai) + geno,
             rcov=~units,
+            control = mmes_control(),
             data=DT)
 summary(mix)$varcomp
 
@@ -77,6 +78,7 @@ head(DTL)
 mix <- mmes(value~trait,
             random = ~vsm(usm(trait),ism(geno), Gu=Ai) ,
             rcov=~vsm(dsm(trait), ism(units)),
+            control = mmes_control(),
             data=DTL)
 summary(mix)$varcomp
 cov2cor(mix$theta$`vsm(usm(trait), ism(geno), Gu = Ai`)

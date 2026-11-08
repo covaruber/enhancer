@@ -73,6 +73,7 @@ attr(Ai, 'inverse')=TRUE
 ###=========================================####
 ans <- mmes(tuber_shape~1,
             random=~vsm(ism(Name), Gu=Ai),
+            control = mmes_control(),
             data=DT2)
 summary(ans)$varcomp
 #                  VarComp  VarCompSE    Zratio

@@ -89,6 +89,7 @@ attr(Ki, 'inverse')=TRUE
 mix0 <- mmes(pheno~1,
              random = ~vsm(ism(id),Gu=Ki),
              rcov=~units,
+             control = mmes_control(),
              data=DT[which(DT$env == "e1"),])
 summary(mix0)$varcomp
 

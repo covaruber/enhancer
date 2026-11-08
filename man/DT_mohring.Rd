@@ -56,7 +56,8 @@ mod1hb <- mmes(Ftime ~ 1, data=DT2,
                + cross.id
                # SCAR reciprocal effects (remaining variance in crosses;
                # if zero there's no reciprocal effects)
-               + vsm(dsm(cross.type), ism(cross.id)) )
+               + vsm(dsm(cross.type), ism(cross.id)),
+               control = mmes_control())
 summary(mod1hb)$varcomp
 
 ##                                    VarComp VarCompSE   Zratio
@@ -68,15 +69,15 @@ summary(mod1hb)$varcomp
 ##
 # GRIFFING MODEL 2, no reciprocal effects ##############################
 
-mod1h <- mmes(Ftime ~ Block + is.cross, data=DT2, nIters = 50,
+mod1h <- mmes(Ftime ~ Block + is.cross, data=DT2,
               random = ~
                 # GCA effects for all (hybrids and inbreds)
                 vsm(ism(overlay(Par1, Par2)))
               # GCA effect (calculated only in hybrids; remaining variance)
               + vsm(ism(is.cross),ism(overlay(Par1, Par2)))
               # SCA effect (calculated in hybrids only)
-              + vsm(ism(is.cross), ism(cross.id))
-              )
+              + vsm(ism(is.cross), ism(cross.id)),
+              control = mmes_control(convergence = list(maxIters = 50L)))
 summary(mod1h)$varcomp
 
 ##                                           VarComp  VarCompSE   Zratio
@@ -87,15 +88,15 @@ summary(mod1h)$varcomp
 ##
 # GRIFFING MODEL 3, no reciprocal effects ###############################
 
-mod1h <- mmes(Ftime ~ Block + is.cross, data=DT2, nIters = 100,
+mod1h <- mmes(Ftime ~ Block + is.cross, data=DT2,
               random = ~
                 # GCAC (only for hybrids)
                 vsm(ism(is.cross),ism(overlay(Par1, Par2)))
               # male GCA (only for inbreds)
               + vsm(ism(is.self),ism(Par1))
               # SCA (for hybrids only)
-              + vsm(ism(is.cross), ism(cross.id))
-              )
+              + vsm(ism(is.cross), ism(cross.id)),
+              control = mmes_control(convergence = list(maxIters = 100L)))
 summary(mod1h)$varcomp
 ##                                           VarComp  VarCompSE   Zratio
 ## overlay(Par1, Par2):is.cross.Ftime-Ftime  927.7895  537.91218 1.724797
@@ -106,7 +107,7 @@ summary(mod1h)$varcomp
 # GRIFFING MODEL 2, with reciprocal effects #############################
 # In Mohring: mixed model 3 reduced
 
-mod1h <- mmes(Ftime ~ Block + is.cross, data=DT2, nIters = 100,
+mod1h <- mmes(Ftime ~ Block + is.cross, data=DT2,
               random = ~
                 # GCAC (for hybrids only)
                 vsm(ism(is.cross),ism(overlay(Par1, Par2)))
@@ -115,8 +116,8 @@ mod1h <- mmes(Ftime ~ Block + is.cross, data=DT2, nIters = 100,
               # SCA (for hybrids only)
               + vsm(ism(is.cross), ism(cross.id))
               # SCAR reciprocal effects (remaning SCA variance)
-              + vsm(ism(cross.type), ism(cross.id))
-              )
+              + vsm(ism(cross.type), ism(cross.id)),
+              control = mmes_control(convergence = list(maxIters = 100L)))
 summary(mod1h)$varcomp
 
 ##                                             VarComp  VarCompSE   Zratio
@@ -129,7 +130,7 @@ summary(mod1h)$varcomp
 # GRIFFING MODEL 3, with RGCA + RSCA ####################################
 # In Mohring: mixed model 3
 
-mod1h <- mmes(Ftime ~ Block + is.cross, data=DT2,nIters = 100,
+mod1h <- mmes(Ftime ~ Block + is.cross, data=DT2,
               random = ~
                 # GCAC (for hybrids only)
                 vsm(ism(is.cross),ism(overlay(Par1, Par2)))
@@ -140,8 +141,8 @@ mod1h <- mmes(Ftime ~ Block + is.cross, data=DT2,nIters = 100,
               # SCA (for hybrids only)
               + vsm(ism(is.cross), ism(cross.id))
               # SCAR: exclude selfs (if zero there's no reciprocal SCA effects)
-              + vsm(ism(cross.type), ism(cross.id))
-              )
+              + vsm(ism(cross.type), ism(cross.id)),
+              control = mmes_control(convergence = list(maxIters = 100L)))
 summary(mod1h)$varcomp
 
 ##                                            VarComp  VarCompSE    Zratio

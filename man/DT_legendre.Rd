@@ -40,6 +40,7 @@ library(orthopolynom)
 mRR2<-mmes(Y~ 1 + Xf
            , random=~ vsm(usm(leg(X,1)),ism(SUBJECT))
            , rcov=~units
+           , control = mmes_control()
            , data=DT)
 summary(mRR2)$varcomp
 

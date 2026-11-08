@@ -43,6 +43,7 @@ library(sommer)
 ans1 <- mmes(Yield~Env,
              random= ~ Name + Env:Name,
              rcov= ~ units,
+             control = mmes_control(),
              data=DT)
 summary(ans1)$varcomp
 
@@ -60,6 +61,7 @@ DT=DT[with(DT, order(Env)), ]
 ans2 <- mmes(Yield~Env,
              random= ~Name + vsm(dsm(Env),ism(Name)),
              rcov= ~ vsm(dsm(Env),ism(units)),
+             control = mmes_control(),
              data=DT)
 summary(ans2)
 
@@ -82,6 +84,7 @@ head(DTL)
 ans1 <- mmes(value~ trait,
              random= ~ vsm(usm(trait), ism(Name)),
              rcov= ~ vsm(dsm(trait), ism(units)),
+             control = mmes_control(),
              data=DTL)
 summary(ans1)$varcomp
 cov2cor(ans1$theta$`vsm(usm(trait), ism(Name`)

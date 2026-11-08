@@ -37,17 +37,21 @@ DT <- DT_ige
 if(requireNamespace("sommer")){
 library(sommer)
 # Indirect genetic effects model without covariance between DGE and IGE
-modIGE <- mmes(trait ~ block, dateWarning = FALSE,
+modIGE <- mmes(trait ~ block,
                random = ~ focal + neighbour,
-               rcov = ~ units, nIters=100,
+               rcov = ~ units,
+               control = mmes_control(convergence = list(maxIters = 100L),
+                                      diagnostics = list(dateWarning = FALSE)),
               data = DT)
 summary(modIGE)$varcomp
 pmonitor(modIGE)
 
 # Indirect genetic effects model with covariance between DGE and IGE using relationship matrices
-modIGE <- mmes(trait ~ block, dateWarning = FALSE,
+modIGE <- mmes(trait ~ block,
                random = ~ covm( vsm(ism(focal)), vsm(ism(neighbour)) ),
-               rcov = ~ units, nIters=100,
+               rcov = ~ units,
+               control = mmes_control(convergence = list(maxIters = 100L),
+                                      diagnostics = list(dateWarning = FALSE)),
               data = DT)
 summary(modIGE)$varcomp
 pmonitor(modIGE)
@@ -57,9 +61,11 @@ Ai <- solve(A_ige + diag(1e-5, nrow(A_ige),nrow(A_ige) ))
 Ai <- as(as(as( Ai,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
 attr(Ai, 'inverse')=TRUE
 # Indirect genetic effects model with covariance between DGE and IGE using relationship matrices
-modIGE <- mmes(trait ~ block, dateWarning = FALSE,
+modIGE <- mmes(trait ~ block,
                random = ~ covm( vsm(ism(focal), Gu=Ai), vsm(ism(neighbour), Gu=Ai) ),
-               rcov = ~ units, nIters=100,
+               rcov = ~ units,
+               control = mmes_control(convergence = list(maxIters = 100L),
+                                      diagnostics = list(dateWarning = FALSE)),
               data = DT)
 summary(modIGE)$varcomp
 pmonitor(modIGE)
@@ -117,4 +123,3 @@ cov2cor(vc$both)
 
 }
 \keyword{datasets}
-

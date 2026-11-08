@@ -45,25 +45,33 @@ library(sommer)
 ##################################
 fm2 <- mmes(Reaction ~ Days,
             random= ~ Subject, 
-            data=DT, tolParInv = 1e-6, verbose = FALSE)
+            data=DT,
+            control = mmes_control(execution = list(inverseTol = 1e-6),
+                                   diagnostics = list(verbose = FALSE)))
 summary(fm2)$varcomp
 
 ##################################
 fm2 <- mmes(Reaction ~ Days,
             random= ~ Subject + vsm(ism(Days), ism(Subject)), 
-            data=DT, tolParInv = 1e-6, verbose = FALSE)
+            data=DT,
+            control = mmes_control(execution = list(inverseTol = 1e-6),
+                                   diagnostics = list(verbose = FALSE)))
 summary(fm2)$varcomp
 
 ##################################
 fm2 <- mmes(Reaction ~ Days,
             random= ~ Subject + vsm(ism(Days), ism(Subject)), 
-            data=DT, tolParInv = 1e-6, verbose = FALSE)
+            data=DT,
+            control = mmes_control(execution = list(inverseTol = 1e-6),
+                                   diagnostics = list(verbose = FALSE)))
 summary(fm2)$varcomp
 
 ##################################
 fm2 <- mmes(Reaction ~ Days,
             random= ~ vsm(ism(Days), ism(Subject)), 
-            data=DT, tolParInv = 1e-6, verbose = FALSE)
+            data=DT,
+            control = mmes_control(execution = list(inverseTol = 1e-6),
+                                   diagnostics = list(verbose = FALSE)))
 summary(fm2)$varcomp
 
 }

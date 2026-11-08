@@ -69,8 +69,8 @@ Si <- as(as(as( Si,  "dMatrix"), "generalMatrix"), "CsparseMatrix")
 attr(Si, 'inverse')=TRUE
 ans2 <- mmes(Yield ~ Location,
              random = ~ vsm(ism(GCA1),Gu=K1i) + vsm(ism(GCA2),Gu=K2i), # + vsm(ism(SCA),Gu=Si),
-             henderson=TRUE,
              rcov=~units,
+             control = mmes_control(formulation = "henderson"),
              data=DT)
 summary(ans2)$varcomp
 

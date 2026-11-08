@@ -49,6 +49,7 @@ library(sommer)
 m3 <- mmes(fixed=Y ~ V + N + V:N,
            random = ~ B + B:MP,
            rcov=~units,
+           control = mmes_control(),
            data = DT)
 summary(m3)$varcomp
 
@@ -73,4 +74,3 @@ condVAR <- lapply(BLUP, function(x){attr(x, which="postVar")}) # take sqrt() for
 }
 
 }
-

@@ -38,6 +38,7 @@ library(sommer)
 mix4 <- mmes(tarsus ~ sex,
              random = ~ dam + fosternest,
              rcov=~units,
+             control = mmes_control(),
              data = DT)
 summary(mix4)$varcomp
 
@@ -58,7 +59,7 @@ DTL <- reshape(DT[,c("animal","sex","dam","fosternest", traits)],
 DTL <- DTL[with(DTL, order(trait,animal)), ]
 head(DTL)
 
-mix3 <- mmes(value ~ trait:sex - 1, henderson=TRUE,
+mix3 <- mmes(value ~ trait:sex - 1, control = mmes_control(formulation = "henderson"),
                 random = ~ vsm(usm(trait),ism(dam)) +
                            vsm(usm(trait), ism(fosternest)),
                 rcov= ~ vsm(dsm(trait),ism(units)),

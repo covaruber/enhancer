@@ -39,6 +39,7 @@ if(requireNamespace("sommer")){
 library(sommer)
 mix1 <- mmes(TSW ~ Check.Gen,
              random = ~ Block + Genotype:Check,
+             control = mmes_control(),
              data=DT)
 summary(mix1)$varcomp
 
@@ -67,4 +68,3 @@ condVAR <- lapply(BLUP, function(x){attr(x, which="postVar")}) # take sqrt() for
 
 }
 \keyword{datasets}
-

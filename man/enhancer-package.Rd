@@ -43,7 +43,7 @@ spline \code{\link{tps}} function. Based on \code{\link{bbasis}}
 \section{Functions for special mixed models}{
 
 Available are \code{\link{add.diallel.vars}}, \code{\link{leg}},
-\code{\link{overlay}}, \code{\link{rrm}}, \code{\link{redmm}},
+\code{\link{overlay}}, \code{\link{rrmat}}, \code{\link{redmm}},
 \code{\link{simGECorMat}} function.
 
 }

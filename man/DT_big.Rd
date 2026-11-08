@@ -57,6 +57,7 @@ if(requireNamespace("sommer")){
   # fit the models
   mixm2 <- mmes(value ~ 1,
                 random=~vsm(ism(envf_repf)) + vsm(dsm(envf_repf), ism(id), Gu=MMTi, rotation=TRUE),
+                control = mmes_control(),
                 data = DT
   )
   summary(mixm2)$varcomp
@@ -83,4 +84,3 @@ H0 <- ran2$id
 
 }
 \keyword{datasets}
-

@@ -59,6 +59,7 @@ library(sommer)
 mix1 <- mmes(yield~entryc,
              random=~block+trt,
              rcov=~units,
+             control = mmes_control(),
              data=data1)
 summary(mix1)$varcomp
 
@@ -84,4 +85,3 @@ condVAR <- lapply(BLUP, function(x){attr(x, which="postVar")}) # take sqrt() for
 }
 
 }
-

@@ -49,6 +49,7 @@ attr(Ai, 'inverse')=TRUE
 modh <- mmes(sugar~1, 
              random=~vsm(ism(overlay(femalef,malef, sparse = FALSE)), Gu=Ai) 
              + genof,
+             control = mmes_control(),
              data=DT)
 summary(modh)$varcomp
 #                          VarComp VarCompSE   Zratio
@@ -92,4 +93,3 @@ condVAR <- lapply(BLUP, function(x){attr(x, which="postVar")}) # take sqrt() for
 
 }
 \keyword{datasets}
-

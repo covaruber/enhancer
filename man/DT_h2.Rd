@@ -37,7 +37,7 @@ head(DT)
 if(requireNamespace("sommer")){
 library(sommer)
 DT=DT[with(DT, order(Env)), ]
-ans1 <- mmes(y~Env, henderson=TRUE,
+ans1 <- mmes(y~Env, control = mmes_control(formulation = "henderson"),
               random=~vsm(dsm(Env),ism(Name)) + vsm(dsm(Env),ism(Block)),
               rcov=~vsm(dsm(Env),ism(units)),
               data=DT)
